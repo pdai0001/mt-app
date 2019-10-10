@@ -14,7 +14,7 @@
         立即登录
       </nuxt-link>
       <nuxt-link
-        to="/login"
+        to="/register"
         class="login"
       >
         注册
@@ -40,6 +40,6 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
 
 </style>
