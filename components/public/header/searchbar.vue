@@ -18,8 +18,11 @@
           </button>
           <dl v-if="isHotPlace" class="hotPlace">
             <dt>热门搜索</dt>
-            <dd v-for="(item, idx) of hotPlace" :key="idx">
-              {{ item }}
+            <dd
+              v-for="(item, idx) of $store.state.home.hotPlace.slice(0, 5)"
+              :key="idx"
+            >
+              {{ item.name }}
             </dd>
           </dl>
           <dl
@@ -27,16 +30,16 @@
             class="searchList"
           >
             <dd v-for="(item, idx) of searchList" :key="idx">
-              {{ item }}
+              {{ item.name }}
             </dd>
           </dl>
         </div>
         <p class="suggest">
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
+          <a
+            v-for="(item, idx) of $store.state.home.hotPlace.slice(0, 5)"
+            :key="idx"
+            href="#"
+          >{{ item.name }}</a>
         </p>
         <ul class="nav">
           <li>
@@ -46,7 +49,7 @@
           </li>
           <li>
             <nuxt-link to="/" class="movie">
-              美团电影
+              猫眼电影
             </nuxt-link>
           </li>
           <li>
@@ -78,6 +81,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   name: 'SearchBar',
   props: {
@@ -87,8 +91,8 @@ export default {
     return {
       search: '',
       isFocus: false,
-      hotPlace: ['火锅', '火锅', '火锅', '火锅'],
-      searchList: ['故宫', '故宫', '故宫', '故宫']
+      hotPlace: [],
+      searchList: []
     }
   },
   computed: {
@@ -109,9 +113,20 @@ export default {
         self.isFocus = false
       }, 200)
     },
-    handleInput () {
-      window.console.log('input')
-    }
+    handleInput: _.debounce(async function () {
+      const self = this
+      const city = self.$store.state.geo.position.city.replace('市', '')
+      self.searchList = []
+      const { status, data: { top } } = await self.$axios.get('/search/top', {
+        params: {
+          input: self.search,
+          city
+        }
+      })
+      if (status === 200) {
+        self.searchList = top.slice(0, 10)
+      }
+    }, 300)
   }
 }
 </script>
