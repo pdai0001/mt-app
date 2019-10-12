@@ -22,15 +22,18 @@
               v-for="(item, idx) of $store.state.home.hotPlace.slice(0, 5)"
               :key="idx"
             >
-              {{ item.name }}
+              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
             </dd>
           </dl>
           <dl
             v-if="isSearchList"
             class="searchList"
           >
-            <dd v-for="(item, idx) of searchList" :key="idx">
-              {{ item.name }}
+            <dd
+              v-for="(item, idx) of searchList"
+              :key="idx"
+            >
+              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
             </dd>
           </dl>
         </div>
@@ -38,7 +41,7 @@
           <a
             v-for="(item, idx) of $store.state.home.hotPlace.slice(0, 5)"
             :key="idx"
-            href="#"
+            :href="'/products?keyword='+encodeURIComponent(item.name)"
           >{{ item.name }}</a>
         </p>
         <ul class="nav">

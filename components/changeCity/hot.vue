@@ -3,7 +3,7 @@
     <dl>
       <dt>热门城市：</dt>
       <dd
-        v-for="item in list"
+        v-for="item of list"
         :key="item.id"
       >
         {{ item.name==='市辖区'?item.province:item.name }}
