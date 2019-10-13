@@ -97,7 +97,6 @@ export default {
     }, 200),
     handleSelect (item) {
       this.$store.dispatch('geo/setCity', item.value)
-      // this.$store.state.geo.position.city = item.value
       window.location.href = '/'
     }
   }

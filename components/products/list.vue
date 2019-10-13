@@ -57,10 +57,10 @@ export default {
       ]
     }
   },
-  async asyncData ({ app }) {
-    const { data } = await app.$axios.get('searchList')
-    return { items: data.list }
-  },
+  // async asyncData ({ app }) {
+  //   const { data } = await app.$axios.get('searchList')
+  //   return { items: data.list }
+  // },
   methods: {
     navSelect () {
       window.console.log('select')
