@@ -1,4 +1,5 @@
-const state = () => ({ position: {} })
+const state = () => ({ position: { city: '武汉市', province: '湖北省' } })
+// const state = () => ({ position: {} })
 
 const mutations = {
   setPosition (state, val) {

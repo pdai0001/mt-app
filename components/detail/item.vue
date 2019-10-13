@@ -47,13 +47,7 @@ export default {
   methods: {
     async createCart () {
       const self = this
-      const {
-        status,
-        data: {
-          code,
-          id
-        }
-      } = await this.$axios.post('/cart/create', {
+      const { status, data: { code, id } } = await this.$axios.post('/cart/create', {
         params: {
           id: Math.random().toString().slice(3, 9),
           detail: {
